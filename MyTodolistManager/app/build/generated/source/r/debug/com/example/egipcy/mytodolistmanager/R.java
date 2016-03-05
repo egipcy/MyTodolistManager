@@ -17,9 +17,9 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f080004;
         public static final int btn_task=0x7f080000;
-        public static final int check=0x7f080003;
+        public static final int cb_task=0x7f080003;
         public static final int et_task=0x7f080001;
-        public static final int task=0x7f080002;
+        public static final int tv_task=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

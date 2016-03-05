@@ -1,37 +1,36 @@
 package com.example.egipcy.mytodolistmanager;
 
-import android.app.Activity;
+
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
-public class MainActivity extends Activity {
+import java.util.ArrayList;
+
+public class MainActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        ListView list = getListView();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        ArrayList<Task> array = new ArrayList<Task>();
+        Task task1 = new Task();
+        task1.setName("Task #1");
+        task1.setChecked(false);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        Task task2 = new Task();
+        task2.setName("Task #2");
+        task2.setChecked(true);
 
-        return super.onOptionsItemSelected(item);
+        array.add(task1);
+        array.add(task2);
+        MyListAdapter mSchedule = new MyListAdapter(this.getBaseContext(), array);
+
+        list.setAdapter(mSchedule);
     }
 }

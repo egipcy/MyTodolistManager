@@ -6,13 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends ListActivity implements View.OnClickListener {
+public class MainActivity extends ListActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     ListView list;
     ArrayList<Task> array;
@@ -37,6 +39,8 @@ public class MainActivity extends ListActivity implements View.OnClickListener {
         this.btn_task.setOnClickListener(this);
 
         this.et_task = (EditText) findViewById(R.id.et_task);
+
+        this.list.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -53,5 +57,27 @@ public class MainActivity extends ListActivity implements View.OnClickListener {
                 this.et_task.setText("");
                 break;
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        if(parent == this.list)
+        {
+            this.array.remove(position);
+            this.mSchedule.notifyDataSetChanged();
+            return true;
+        }
+
+        return false;
+    }
+
+    public void MyHandler(View v)
+    {
+        CheckBox cb = (CheckBox) v;
+        int position = Integer.parseInt(cb.getTag().toString());
+        Task modified_task = this.array.get(position);
+        modified_task.setChecked(cb.isChecked());
+        this.array.set(position, modified_task);
     }
 }

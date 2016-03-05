@@ -30,6 +30,7 @@ public class MyListAdapter extends BaseAdapter
         CheckBox cb_task = (CheckBox) row.findViewById(R.id.cb_task);
         tv_task.setText(al.get(position).getName());
         cb_task.setChecked(al.get(position).isChecked());
+        cb_task.setTag(position);
         return row;
     }
 
